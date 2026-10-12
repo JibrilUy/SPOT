@@ -2,7 +2,7 @@
 
 An undergraduate thesis project focused on automated crowd monitoring and occupancy tracking using computer vision.
 
-## Developed by:
+## Developed and Authored by:
 * Budaño, Gabriel C. 
 * Lacuna, Andrew Gabriel E.
 * Panganiban, Jayve Jian J. 
