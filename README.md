@@ -15,16 +15,18 @@ An undergraduate thesis project focused on automated crowd monitoring and occupa
 * **Language:** Python
 * **GUI Framework:** PyQt6
 * **Computer Vision & Tracking:** OpenCV, YOLO, filtering algorithms
-* **Backend & Hosting:** Firebase Firestore
-* **Streaming Infrastructure:** MediaMTX, OBS Studio
+* **Backend & Hosting:** PostGres SQL
 
 ## Project Structure
 ```text
 SPOT/
+├── assets/
+│   └── resource fles/
+├── controllers/
+│   └── Connects Front and Backend/
+├── core/
+│   └── Camera Processing/
 ├── gui/
-│   ├── login_page/
-│   └── ...
-├── qtpy_ui_files/
-│   └── FloorCameraPages/
+│   └── PyQT generated files/
 ├── main.py
 └── README.md
