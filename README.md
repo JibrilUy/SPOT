@@ -2,11 +2,11 @@
 
 An undergraduate thesis project focused on automated crowd monitoring and occupancy tracking using computer vision.
 
-Developed by:
-Budaño, Gabriel C. 
-Lacuna, Andrew Gabriel E.
-Panganiban, Jayve Jian J. 
-Cortez, Rexine Bradley d.L.
+## Developed by:
+* Budaño, Gabriel C. 
+* Lacuna, Andrew Gabriel E.
+* Panganiban, Jayve Jian J. 
+* Cortez, Rexine Bradley d.L.
 
 ## Overview
 **SPOT** (Spatial Positioning through Optical Tracking) is an automated system developed as an undergraduate thesis for the Bulacan State University E-library. The system utilizes CCTV camera feeds and deep learning object detection architectures (such as YOLO) alongside tracking algorithms to detect, count, and monitor individuals within the facility in real time.
