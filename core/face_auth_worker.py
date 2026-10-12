@@ -1,0 +1,60 @@
+import cv2
+from PyQt6.QtCore import QThread, pyqtSignal
+
+from core.face_recognizer import FaceRecognizer
+
+
+class FaceAuthWorker(QThread):
+    """
+    Background thread that continuously reads the webcam and runs face
+    recognition each frame — same bridge pattern as CameraWorker, just for
+    face auth instead of person counting. The UI only ever reacts to the
+    signals below; it never imports FaceRecognizer or cv2 directly.
+    """
+
+    frame_ready = pyqtSignal(object)   # annotated frame (numpy array, BGR)
+    match_updated = pyqtSignal(bool)   # True if the enrolled face is currently visible
+    error_occurred = pyqtSignal(str)
+
+    def __init__(self, camera_index=0, model_path="assets/faces/trainer.yml"):
+        super().__init__()
+        self._camera_index = camera_index
+        self._running = False
+
+        try:
+            self._recognizer = FaceRecognizer(model_path=model_path)
+            self._init_error = None
+        except FileNotFoundError as e:
+            self._recognizer = None
+            self._init_error = str(e)
+
+    def run(self):
+        if self._recognizer is None:
+            self.error_occurred.emit(self._init_error)
+            return
+
+        if isinstance(self._camera_index, int):
+            cap = cv2.VideoCapture(self._camera_index, cv2.CAP_DSHOW)
+        else:
+            cap = cv2.VideoCapture(self._camera_index)
+
+        if not cap.isOpened():
+            self.error_occurred.emit(f"Could not open camera: {self._camera_index!r}")
+            return
+
+        self._running = True
+        while self._running and cap.isOpened():
+            success, frame = cap.read()
+            if not success:
+                break
+
+            annotated, is_match, _confidence = self._recognizer.process(frame)
+
+            self.frame_ready.emit(annotated)
+            self.match_updated.emit(is_match)
+
+        cap.release()
+
+    def stop(self):
+        self._running = False
+        self.wait()
