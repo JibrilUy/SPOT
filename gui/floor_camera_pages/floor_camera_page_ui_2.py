@@ -41,8 +41,20 @@ class Ui_floor_camera_page_2(object):
         self.dashboard_title_card.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.dashboard_title_card.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.dashboard_title_card.setObjectName("dashboard_title_card")
+        self.dashboard_label = QtWidgets.QLabel(parent=self.dashboard_title_card)
+        self.dashboard_label.setGeometry(QtCore.QRect(40, 10, 411, 121))
+        font = QtGui.QFont()
+        font.setPointSize(32)
+        font.setBold(True)
+        self.dashboard_label.setFont(font)
+        self.dashboard_label.setStyleSheet("color: #870001;")
+        self.dashboard_label.setWordWrap(True)
+        self.dashboard_label.setObjectName("dashboard_label")
         self.bulsu_logo = QtWidgets.QFrame(parent=self.dashboard_title_card)
-        self.bulsu_logo.setGeometry(QtCore.QRect(40, 0, 150, 150))
+        self.bulsu_logo.setGeometry(QtCore.QRect(480, 30, 100, 100))
+        font = QtGui.QFont()
+        font.setPointSize(6)
+        self.bulsu_logo.setFont(font)
         self.bulsu_logo.setStyleSheet("#bulsu_logo{\n"
 "    border-image: url(:/image/bulsuLogo.png)0 0 0 0 stretch stretch;\n"
 "}")
@@ -50,21 +62,14 @@ class Ui_floor_camera_page_2(object):
         self.bulsu_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.bulsu_logo.setObjectName("bulsu_logo")
         self.spot_logo = QtWidgets.QFrame(parent=self.dashboard_title_card)
-        self.spot_logo.setGeometry(QtCore.QRect(420, 40, 150, 86))
+        self.spot_logo.setGeometry(QtCore.QRect(615, 30, 100, 100))
         self.spot_logo.setStyleSheet("#spot_logo {\n"
-"    border-image: url(:/image/SPOT LOGO.png)0 0 0 0 stretch stretch;\n"
-"}")
+"    border-image: url(:/image/spot_logo.png)0 0 0 0 stretch stretch;\n"
+"}\n"
+"")
         self.spot_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.spot_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.spot_logo.setObjectName("spot_logo")
-        self.elib_logo = QtWidgets.QFrame(parent=self.dashboard_title_card)
-        self.elib_logo.setGeometry(QtCore.QRect(230, 10, 150, 142))
-        self.elib_logo.setStyleSheet("#elib_logo{\n"
-"    border-image: url(:/image/elib_logo.png)0 0 0 0 stretch stretch;\n"
-"}")
-        self.elib_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.elib_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.elib_logo.setObjectName("elib_logo")
         self.dashboard_main_layout = QtWidgets.QFrame(parent=self.centralwidget)
         self.dashboard_main_layout.setGeometry(QtCore.QRect(0, 160, 1920, 911))
         self.dashboard_main_layout.setStyleSheet("background: transparent;")
@@ -158,15 +163,18 @@ class Ui_floor_camera_page_2(object):
         self.tracking_button = ClickableFrame(parent=self.Left_layout_frame)
         self.tracking_button.setGeometry(QtCore.QRect(375, 815, 361, 50))
         self.tracking_button.setMinimumSize(QtCore.QSize(300, 20))
-        self.tracking_button.setStyleSheet("QFrame#tracking_button{\n"
-"    background-color: #533b15; \n"
-"\n"
+        self.tracking_button.setStyleSheet("QFrame#tracking_button {\n"
+"    background-color: #f5aa2b;\n"
 "    border-radius: 10px;\n"
 "    min-width: 300px;\n"
 "    max-width: 400px;\n"
 "    min-height: 20px;\n"
 "    max-height: 75px;\n"
 "    border: none;\n"
+"}\n"
+"\n"
+"QFrame#tracking_button:hover {\n"
+"    background-color: #ffba45;\n"
 "}")
         self.tracking_button.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.tracking_button.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -485,6 +493,7 @@ class Ui_floor_camera_page_2(object):
     def retranslateUi(self, floor_page_2):
         _translate = QtCore.QCoreApplication.translate
         floor_page_2.setWindowTitle(_translate("floor_page_2", "MainWindow"))
+        self.dashboard_label.setText(_translate("floor_page_2", "Bulacan State University E-Library"))
         self.floor_count_indicator.setText(_translate("floor_page_2", "4444"))
         self.floor_count_label.setText(_translate("floor_page_2", "FLOOR COUNT"))
         self.tracking_button_label.setText(_translate("floor_page_2", "START TRACKING"))

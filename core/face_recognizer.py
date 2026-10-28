@@ -4,7 +4,7 @@ import cv2
 
 class FaceRecognizer:
     """
-    Single-user face recognizer using OpenCV's built-in LBPH algorithm.
+    Face recognizer using OpenCV's built-in LBPH algorithm.
     Requires a model already trained via enroll_face.py — this class only
     loads and runs it, it doesn't do enrollment itself.
     """
@@ -12,7 +12,7 @@ class FaceRecognizer:
     # LBPH confidence is actually a DISTANCE — lower means a closer match,
     # 0 would be identical. Tune this if you get too many false
     # accepts/rejects: lower = stricter, higher = more lenient.
-    CONFIDENCE_THRESHOLD = 48
+    CONFIDENCE_THRESHOLD = 100
 
     def __init__(self, model_path: str = "assets/faces/trainer.yml", cascade_path: str = None):
         # Defaults to a local copy in assets/ (see download_cascade.py)
@@ -44,14 +44,14 @@ class FaceRecognizer:
         self.recognizer = cv2.face.LBPHFaceRecognizer_create()
         self.recognizer.read(model_path)
 
-    def process(self, frame):
+    def process(self, frame, expected_label=None):
         """
         Detects faces in the frame and attempts recognition against the
         enrolled model. Draws a box around each detected face (green if
         matched, red if not) directly onto the frame.
 
         Returns (annotated_frame, is_match, confidence).
-        is_match is True if ANY detected face matches the enrolled user
+        is_match is True only if a detected face matches expected_label
         within CONFIDENCE_THRESHOLD. confidence is the best (lowest)
         distance found, or None if no face was detected at all.
         """
@@ -65,7 +65,14 @@ class FaceRecognizer:
             face_roi = gray[y:y + h, x:x + w]
             label, confidence = self.recognizer.predict(face_roi)
 
-            matched = confidence < self.CONFIDENCE_THRESHOLD
+            # A low LBPH distance is NOT sufficient: it must be the account's
+            # OWN enrollment label. None disables face matching until a user
+            # has entered a valid password.
+            matched = (
+                expected_label is not None
+                and int(label) == int(expected_label)
+                and confidence < self.CONFIDENCE_THRESHOLD
+            )
             if matched:
                 is_match = True
                 if best_confidence is None or confidence < best_confidence:

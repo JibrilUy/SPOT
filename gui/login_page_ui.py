@@ -120,11 +120,11 @@ class Ui_login_page(object):
         self.gridLayout = QtWidgets.QGridLayout(self.login_card_layout)
         self.gridLayout.setObjectName("gridLayout")
         spacerItem = QtWidgets.QSpacerItem(20, 221, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout.addItem(spacerItem, 0, 1, 1, 1)
+        self.gridLayout.addItem(spacerItem, 2, 1, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(261, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout.addItem(spacerItem1, 1, 2, 1, 1)
         spacerItem2 = QtWidgets.QSpacerItem(20, 221, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout.addItem(spacerItem2, 2, 1, 1, 1)
+        self.gridLayout.addItem(spacerItem2, 0, 1, 1, 1)
         spacerItem3 = QtWidgets.QSpacerItem(261, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout.addItem(spacerItem3, 1, 0, 1, 1)
         self.login_card = QtWidgets.QFrame(parent=self.login_card_layout)
@@ -157,7 +157,7 @@ class Ui_login_page(object):
         self.login_card.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.login_card.setObjectName("login_card")
         self.login_card_top = QtWidgets.QFrame(parent=self.login_card)
-        self.login_card_top.setGeometry(QtCore.QRect(1, 3, 395, 101))
+        self.login_card_top.setGeometry(QtCore.QRect(1, 3, 401, 101))
         self.login_card_top.setStyleSheet("#login_card_top {\n"
 "    background-color: #870001;\n"
 "    border-top-left-radius: 18px;\n"
@@ -182,15 +182,6 @@ class Ui_login_page(object):
         self.login_card_bottom.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.login_card_bottom.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.login_card_bottom.setObjectName("login_card_bottom")
-        self.bulsu_logo = QtWidgets.QFrame(parent=self.login_card)
-        self.bulsu_logo.setGeometry(QtCore.QRect(140, 30, 117, 117))
-        self.bulsu_logo.setMinimumSize(QtCore.QSize(0, 0))
-        self.bulsu_logo.setStyleSheet("QFrame#bulsu_logo {\n"
-"    border-image: url(:/image/bulsuLogo.png) 0 0 0 0 stretch stretch;\n"
-"}")
-        self.bulsu_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.bulsu_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.bulsu_logo.setObjectName("bulsu_logo")
         self.login_card_middle = QtWidgets.QFrame(parent=self.login_card)
         self.login_card_middle.setGeometry(QtCore.QRect(38, 140, 321, 331))
         self.login_card_middle.setStyleSheet("#login_card_middle {\n"
@@ -294,30 +285,15 @@ class Ui_login_page(object):
         self.verticalLayout.setStretch(0, 1)
         self.verticalLayout.setStretch(3, 1)
         self.verticalLayout.setStretch(4, 4)
-        self.elib_logo = QtWidgets.QFrame(parent=self.login_card)
-        self.elib_logo.setGeometry(QtCore.QRect(23, 52, 101, 101))
-        self.elib_logo.setStyleSheet("#elib_logo{\n"
-"    border-image: url(:/image/elib_logo.png)0 0 0 0 stretch stretch;\n"
-"}")
-        self.elib_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.elib_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.elib_logo.setObjectName("elib_logo")
         self.spot_logo = QtWidgets.QFrame(parent=self.login_card)
-        self.spot_logo.setGeometry(QtCore.QRect(271, 75, 104, 54))
+        self.spot_logo.setGeometry(QtCore.QRect(160, 60, 85, 85))
         self.spot_logo.setMinimumSize(QtCore.QSize(0, 0))
-        self.spot_logo.setStyleSheet("#spot_logo{\n"
-"    border-image: url(:/image/SPOT LOGO.png) 0 0 0 0 stretch stretch;\n"
-"}\n"
-"")
+        self.spot_logo.setStyleSheet("QFrame#spot_logo {\n"
+"    border-image: url(:/image/spot_logo.png) 0 0 0 0 stretch stretch;\n"
+"}")
         self.spot_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.spot_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.spot_logo.setObjectName("spot_logo")
-        self.login_card_top.raise_()
-        self.login_card_bottom.raise_()
-        self.login_card_middle.raise_()
-        self.bulsu_logo.raise_()
-        self.elib_logo.raise_()
-        self.spot_logo.raise_()
         self.gridLayout.addWidget(self.login_card, 1, 1, 1, 1)
         self.horizontalLayout.addWidget(self.login_card_layout)
         self.horizontalLayout.setStretch(0, 1)
@@ -330,7 +306,7 @@ class Ui_login_page(object):
         _translate = QtCore.QCoreApplication.translate
         login_page.setWindowTitle(_translate("login_page", "MainWindow"))
         self.facial_verification_label.setText(_translate("login_page", "FACIAL VERIFICATION"))
-        self.facial_verification_tip_label.setText(_translate("login_page", "Please look at the camera for 3 seconds"))
+        self.facial_verification_tip_label.setText(_translate("login_page", "Please look at the camera for 2 seconds"))
         self.login_title.setText(_translate("login_page", "SPOT: Spatial Positioning through Optical Tracking"))
         self.wrong_account_label.setText(_translate("login_page", "Wrong Account or Password. Please try again"))
         self.login_username_entry.setPlaceholderText(_translate("login_page", "Username"))

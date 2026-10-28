@@ -10,20 +10,20 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class Ui_floor_camera_page_1(object):
-    def setupUi(self, floor_page_2):
-        floor_page_2.setObjectName("floor_page_2")
-        floor_page_2.resize(1920, 1080)
+    def setupUi(self, floor_page_1):
+        floor_page_1.setObjectName("floor_page_1")
+        floor_page_1.resize(1920, 1063)
         font = QtGui.QFont()
         font.setBold(False)
-        floor_page_2.setFont(font)
-        floor_page_2.setStyleSheet("#centralwidget {\n"
+        floor_page_1.setFont(font)
+        floor_page_1.setStyleSheet("#centralwidget {\n"
 "    border-image: url(:/image/elib_transparent_bg.png) 0 0 0 0 stretch stretch;\n"
 "    border: none;\n"
 "    margin: 0px;\n"
 "    padding: 0px;\n"
 "}\n"
 "")
-        self.centralwidget = QtWidgets.QWidget(parent=floor_page_2)
+        self.centralwidget = QtWidgets.QWidget(parent=floor_page_1)
         self.centralwidget.setStyleSheet("QWidget#centralwidget{\n"
 "background-color: rgba(80, 0, 0, 180);\n"
 ";\n"
@@ -42,7 +42,10 @@ class Ui_floor_camera_page_1(object):
         self.dashboard_title_card.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.dashboard_title_card.setObjectName("dashboard_title_card")
         self.bulsu_logo = QtWidgets.QFrame(parent=self.dashboard_title_card)
-        self.bulsu_logo.setGeometry(QtCore.QRect(40, 0, 150, 150))
+        self.bulsu_logo.setGeometry(QtCore.QRect(480, 30, 100, 100))
+        font = QtGui.QFont()
+        font.setPointSize(6)
+        self.bulsu_logo.setFont(font)
         self.bulsu_logo.setStyleSheet("#bulsu_logo{\n"
 "    border-image: url(:/image/bulsuLogo.png)0 0 0 0 stretch stretch;\n"
 "}")
@@ -50,21 +53,23 @@ class Ui_floor_camera_page_1(object):
         self.bulsu_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.bulsu_logo.setObjectName("bulsu_logo")
         self.spot_logo = QtWidgets.QFrame(parent=self.dashboard_title_card)
-        self.spot_logo.setGeometry(QtCore.QRect(420, 40, 150, 86))
+        self.spot_logo.setGeometry(QtCore.QRect(615, 30, 100, 100))
         self.spot_logo.setStyleSheet("#spot_logo {\n"
-"    border-image: url(:/image/SPOT LOGO.png)0 0 0 0 stretch stretch;\n"
-"}")
+"    border-image: url(:/image/spot_logo.png)0 0 0 0 stretch stretch;\n"
+"}\n"
+"")
         self.spot_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.spot_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.spot_logo.setObjectName("spot_logo")
-        self.elib_logo = QtWidgets.QFrame(parent=self.dashboard_title_card)
-        self.elib_logo.setGeometry(QtCore.QRect(230, 10, 150, 142))
-        self.elib_logo.setStyleSheet("#elib_logo{\n"
-"    border-image: url(:/image/elib_logo.png)0 0 0 0 stretch stretch;\n"
-"}")
-        self.elib_logo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.elib_logo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.elib_logo.setObjectName("elib_logo")
+        self.dashboard_label = QtWidgets.QLabel(parent=self.dashboard_title_card)
+        self.dashboard_label.setGeometry(QtCore.QRect(40, 10, 411, 121))
+        font = QtGui.QFont()
+        font.setPointSize(32)
+        font.setBold(True)
+        self.dashboard_label.setFont(font)
+        self.dashboard_label.setStyleSheet("color: #870001;")
+        self.dashboard_label.setWordWrap(True)
+        self.dashboard_label.setObjectName("dashboard_label")
         self.dashboard_main_layout = QtWidgets.QFrame(parent=self.centralwidget)
         self.dashboard_main_layout.setGeometry(QtCore.QRect(0, 160, 1920, 911))
         self.dashboard_main_layout.setStyleSheet("background: transparent;")
@@ -158,15 +163,18 @@ class Ui_floor_camera_page_1(object):
         self.tracking_button = ClickableFrame(parent=self.Left_layout_frame)
         self.tracking_button.setGeometry(QtCore.QRect(375, 815, 361, 50))
         self.tracking_button.setMinimumSize(QtCore.QSize(300, 20))
-        self.tracking_button.setStyleSheet("QFrame#tracking_button{\n"
-"    background-color: #533b15; \n"
-"\n"
+        self.tracking_button.setStyleSheet("QFrame#tracking_button {\n"
+"    background-color: #f5aa2b;\n"
 "    border-radius: 10px;\n"
 "    min-width: 300px;\n"
 "    max-width: 400px;\n"
 "    min-height: 20px;\n"
 "    max-height: 75px;\n"
 "    border: none;\n"
+"}\n"
+"\n"
+"QFrame#tracking_button:hover {\n"
+"    background-color: #ffba45;\n"
 "}")
         self.tracking_button.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.tracking_button.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -477,38 +485,39 @@ class Ui_floor_camera_page_1(object):
         self.floor_selector_icon.setPixmap(QtGui.QPixmap(":/image/hamburger_icon.svg"))
         self.floor_selector_icon.setScaledContents(True)
         self.floor_selector_icon.setObjectName("floor_selector_icon")
-        floor_page_2.setCentralWidget(self.centralwidget)
+        floor_page_1.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(floor_page_2)
-        QtCore.QMetaObject.connectSlotsByName(floor_page_2)
+        self.retranslateUi(floor_page_1)
+        QtCore.QMetaObject.connectSlotsByName(floor_page_1)
 
-    def retranslateUi(self, floor_page_2):
+    def retranslateUi(self, floor_page_1):
         _translate = QtCore.QCoreApplication.translate
-        floor_page_2.setWindowTitle(_translate("floor_page_2", "MainWindow"))
-        self.floor_count_indicator.setText(_translate("floor_page_2", "4444"))
-        self.floor_count_label.setText(_translate("floor_page_2", "FLOOR COUNT"))
-        self.tracking_button_label.setText(_translate("floor_page_2", "START TRACKING"))
-        self.camera_count_indicator.setText(_translate("floor_page_2", "6"))
-        self.current_camera_indicator.setText(_translate("floor_page_2", "7"))
-        self.floor_count_label_2.setText(_translate("floor_page_2", "CAMERA COUNT"))
-        self.floor_count_label_4.setText(_translate("floor_page_2", "CURRENT CAMERA"))
-        self.dashboard_button_label.setText(_translate("floor_page_2", "DASHBOARD"))
-        self.camera_multiple_view_label.setText(_translate("floor_page_2", "x1"))
-        self.camera_view_label.setText(_translate("floor_page_2", "CAMERA VIEW(S)"))
-        self.floor_level_indicator.setText(_translate("floor_page_2", "Ground Floor"))
-        self.datetime_day_of_the_week.setText(_translate("floor_page_2", "Thursday"))
-        self.datetime_current_date.setText(_translate("floor_page_2", "October 13, 2026"))
-        self.datetime_meridiem_indicator.setText(_translate("floor_page_2", "PM"))
-        self.datetime_current_time.setText(_translate("floor_page_2", "12:00"))
-        self.datetime_label.setText(_translate("floor_page_2", "DATE & TIME"))
+        floor_page_1.setWindowTitle(_translate("floor_page_1", "MainWindow"))
+        self.dashboard_label.setText(_translate("floor_page_1", "Bulacan State University E-Library"))
+        self.floor_count_indicator.setText(_translate("floor_page_1", "4444"))
+        self.floor_count_label.setText(_translate("floor_page_1", "FLOOR COUNT"))
+        self.tracking_button_label.setText(_translate("floor_page_1", "START TRACKING"))
+        self.camera_count_indicator.setText(_translate("floor_page_1", "6"))
+        self.current_camera_indicator.setText(_translate("floor_page_1", "7"))
+        self.floor_count_label_2.setText(_translate("floor_page_1", "CAMERA COUNT"))
+        self.floor_count_label_4.setText(_translate("floor_page_1", "CURRENT CAMERA"))
+        self.dashboard_button_label.setText(_translate("floor_page_1", "DASHBOARD"))
+        self.camera_multiple_view_label.setText(_translate("floor_page_1", "x1"))
+        self.camera_view_label.setText(_translate("floor_page_1", "CAMERA VIEW(S)"))
+        self.floor_level_indicator.setText(_translate("floor_page_1", "Ground Floor"))
+        self.datetime_day_of_the_week.setText(_translate("floor_page_1", "Thursday"))
+        self.datetime_current_date.setText(_translate("floor_page_1", "October 13, 2026"))
+        self.datetime_meridiem_indicator.setText(_translate("floor_page_1", "PM"))
+        self.datetime_current_time.setText(_translate("floor_page_1", "12:00"))
+        self.datetime_label.setText(_translate("floor_page_1", "DATE & TIME"))
 from assets.clickable_frame import ClickableFrame
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    floor_page_2 = QtWidgets.QMainWindow()
-    ui = Ui_floor_page_2()
-    ui.setupUi(floor_page_2)
-    floor_page_2.show()
+    floor_page_1 = QtWidgets.QMainWindow()
+    ui = Ui_floor_page_1()
+    ui.setupUi(floor_page_1)
+    floor_page_1.show()
     sys.exit(app.exec())

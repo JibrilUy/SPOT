@@ -28,13 +28,16 @@ class CameraWorker(QThread):
     def __init__(
         self,
         camera_index=0,
-        model_path: str = "yolo11m.pt",
+        model_path: str = "yolo11n.pt",
         loop: bool = False,
+        detector=None,
     ):
         super().__init__()
-
         self._camera_index = camera_index
-        self._detector = PersonDetector(model_path)
+        # Anything with a detect(frame) -> (count, annotated_frame) method
+        # works here. TrackingWorker injects a PersonTracker so it can reuse
+        # this whole capture/loop/pacing loop instead of copying it.
+        self._detector = detector if detector is not None else PersonDetector(model_path)
         self._loop = loop
         self._running = False
 
@@ -42,7 +45,6 @@ class CameraWorker(QThread):
         self._last_count = 0
         self._missed_frames = 0
         self._max_missed_frames = 30
-
 
     def run(self):
         is_file = not isinstance(self._camera_index, int)
@@ -85,6 +87,8 @@ class CameraWorker(QThread):
                     # rewinding forever — if the very next read also
                     # fails, we fall through to break.
                     cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                    if hasattr(self._detector, "reset_tracking"):
+                        self._detector.reset_tracking()
                     just_rewound = True
                     continue
                 break
@@ -95,17 +99,19 @@ class CameraWorker(QThread):
             # Prevent temporary detection losses from making
             # the displayed count instantly drop.
             if count == 0 and self._last_count > 0:
-                self._missed_frames += 1
+                self._missed_frames += 10
 
                 if self._missed_frames <= self._max_missed_frames:
                     count = self._last_count
+                else:
+                    self._last_count = count
+                    self._missed_frames = 0
             else:
                 self._last_count = count
                 self._missed_frames = 0
 
             self.frame_ready.emit(annotated)
             self.count_updated.emit(count)
-
 
             if frame_interval:
                 remaining = frame_interval - (time.monotonic() - loop_start)

@@ -1,4 +1,5 @@
 import cv2
+import threading
 from PyQt6.QtCore import QThread, pyqtSignal
 
 from core.face_recognizer import FaceRecognizer
@@ -20,6 +21,8 @@ class FaceAuthWorker(QThread):
         super().__init__()
         self._camera_index = camera_index
         self._running = False
+        self._label_lock = threading.Lock()
+        self._expected_label = None
 
         try:
             self._recognizer = FaceRecognizer(model_path=model_path)
@@ -27,6 +30,22 @@ class FaceAuthWorker(QThread):
         except FileNotFoundError as e:
             self._recognizer = None
             self._init_error = str(e)
+
+    def reload_model(self):
+        """Reload trainer.yml after super-admin enrollment, before restarting camera."""
+        if self.isRunning():
+            self.stop()
+        try:
+            self._recognizer = FaceRecognizer()
+            self._init_error = None
+        except (FileNotFoundError, RuntimeError) as exc:
+            self._recognizer = None
+            self._init_error = str(exc)
+
+    def set_expected_label(self, face_label):
+        """Select the ID to authenticate, or None to disallow matches."""
+        with self._label_lock:
+            self._expected_label = face_label
 
     def run(self):
         if self._recognizer is None:
@@ -48,7 +67,11 @@ class FaceAuthWorker(QThread):
             if not success:
                 break
 
-            annotated, is_match, _confidence = self._recognizer.process(frame)
+            with self._label_lock:
+                expected_label = self._expected_label
+            annotated, is_match, _confidence = self._recognizer.process(
+                frame, expected_label=expected_label
+            )
 
             self.frame_ready.emit(annotated)
             self.match_updated.emit(is_match)
